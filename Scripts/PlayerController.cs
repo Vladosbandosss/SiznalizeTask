@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int playerSpeed;
+    [SerializeField] private int _playerSpeed;
 
-    private Rigidbody2D _rb;
-    private float inputX;
-    private float move;
+    private  Rigidbody2D _rigidbody;
+
+    private float _inputX;
+    private float _move;
+
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
-    void Update()
+
+    private void Update()
     {
      
         if (Input.GetKey(KeyCode.D))
         {
-            float inputX = Input.GetAxis("Horizontal");
-            float move = playerSpeed * inputX;
-           _rb.velocity = new Vector3(move, 0);
+           
+            _inputX = Input.GetAxis("Horizontal");
+            _move = _playerSpeed * _inputX;
+            Debug.Log(_move);
+           _rigidbody.velocity = new Vector3(_move, 0);
         }
 
        else if (Input.GetKey(KeyCode.A))
         {
-             inputX = Input.GetAxis("Horizontal");
-             float move = playerSpeed * inputX;
-            _rb.velocity = new Vector3(move, 0);
+             _inputX = Input.GetAxis("Horizontal");
+             float move = _playerSpeed * _inputX;
+            _rigidbody.velocity = new Vector3(move, 0);
         }
     }
 }
