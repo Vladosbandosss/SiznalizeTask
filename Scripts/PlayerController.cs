@@ -26,13 +26,16 @@ public class PlayerController : MonoBehaviour
             _move = _playerSpeed * _inputX;
             Debug.Log(_move);
            _rigidbody.velocity = new Vector3(_move, 0);
+
         }
 
        else if (Input.GetKey(KeyCode.A))
         {
+
              _inputX = Input.GetAxis("Horizontal");
              float move = _playerSpeed * _inputX;
             _rigidbody.velocity = new Vector3(move, 0);
+
         }
     }
 }
