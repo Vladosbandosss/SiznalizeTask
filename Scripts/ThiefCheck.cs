@@ -6,16 +6,16 @@ public class ThiefCheck : MonoBehaviour
 {
     AudioSource _alarmSound;
 
-    private Coroutine musicPaly;
+    private Coroutine _musicPlay;
 
-    private float _voll;
-    private int lowAlarmSteps = 4;
+    private float _musicVolume;
+    private int _lowAlarmSteps = 4;
     private float _maxVolume = 1f;
     private float _changeVolumeSize = 0.2f;
  
     private void Start()
     {
-        _voll = 0f;
+        _musicVolume = 0f;
         _alarmSound = GetComponent<AudioSource>();
     }
 
@@ -24,7 +24,7 @@ public class ThiefCheck : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerController>())
         {
             Debug.Log("ишгнрок вошел");
-           musicPaly =  StartCoroutine(CallingRing());
+           _musicPlay =  StartCoroutine(CallingRing());
         }
     }
 
@@ -34,7 +34,7 @@ public class ThiefCheck : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerController>())
         {
             Debug.Log("игрок вышел");
-            StopCoroutine(musicPaly);
+            StopCoroutine(_musicPlay);
         }
     }
 
@@ -43,17 +43,17 @@ public class ThiefCheck : MonoBehaviour
            
         for (int i = 0; i < int.MaxValue; i++)
         {
-            _alarmSound.volume = _voll;
+            _alarmSound.volume = _musicVolume;
             _alarmSound.Play();
             Debug.Log("работаю");
 
             yield return new WaitForSeconds(1f);
 
-            _voll += _changeVolumeSize;
+            _musicVolume += _changeVolumeSize;
 
-            if (_voll >= _maxVolume)
+            if (_musicVolume >= _maxVolume)
             {
-                for (int j = 0; j < lowAlarmSteps; j++)
+                for (int j = 0; j < _lowAlarmSteps; j++)
                 {
                     LowerAlarm();
 
@@ -68,8 +68,8 @@ public class ThiefCheck : MonoBehaviour
 
     private void LowerAlarm()
     {
-        _voll -= _changeVolumeSize;
-        _alarmSound.volume = _voll;
+        _musicVolume -= _changeVolumeSize;
+        _alarmSound.volume = _musicVolume;
         _alarmSound.Play();
     }
 }

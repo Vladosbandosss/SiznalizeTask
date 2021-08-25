@@ -24,8 +24,7 @@ public class PlayerController : MonoBehaviour
            
             _inputX = Input.GetAxis("Horizontal");
             _move = _playerSpeed * _inputX;
-            Debug.Log(_move);
-           _rigidbody.velocity = new Vector3(_move, 0);
+            _rigidbody.velocity = new Vector3(_move, 0);
 
         }
 
